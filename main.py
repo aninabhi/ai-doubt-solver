@@ -3,12 +3,6 @@ from pydantic import BaseModel
 from openai import OpenAI
 import os
 
-#temperory code check
-@app.get("/check")
-def check_key():
-    key = os.getenv("OPENAI_API_KEY")
-    return {"key_loaded": key is not None}
-
 app = FastAPI()
 
 class Question(BaseModel):
@@ -16,6 +10,11 @@ class Question(BaseModel):
 
 class Answer(BaseModel):
     answer: str
+# DEBUG endpoint
+@app.get("/check")
+def check_key():
+    key = os.getenv("OPENAI_API_KEY")
+    return {"key_loaded": key is not None}
 
 @app.get("/")
 def root():
